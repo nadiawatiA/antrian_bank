@@ -1,0 +1,63 @@
+package queueJFrame;
+
+import java.util.LinkedList;
+import java.util.Queue;
+import javax.swing.JOptionPane;
+
+/**
+ *
+ * @author ISMYNR
+ */
+public class queue extends javax.swing.JFrame {
+    /**
+     * Creates new form queue
+     */
+    
+    Queue<Object> antrian = new LinkedList<>();
+    int nomor = 0;
+    
+    public queue() {
+        initComponents();
+        inisialisasi();
+    }
+    private void inisialisasi(){
+        lbJmlAntrian.setText("0");
+        lbTotalAntrian.setText("0");
+        lbPanggilAntrian.setText("-----");
+        
+        ;
+        txtAtas4.setText("Nomor Antrian");
+        txtAtas5.setText("--------");
+        txtAtas6.setText("Silahkan menunggu");
+        txtAtas7.setText("--------");
+    }
+    private void tambahAntrian(){
+        nomor++;
+        String antr = "Antrian "+nomor;
+        antrian.add(antr);
+        String cvt = String.valueOf(antrian.size());
+        lbJmlAntrian.setText(cvt);
+        lbPanggilAntrian.setText(""+antrian.peek());
+        lbTotalAntrian.setText(""+nomor);
+        txtAntrian.append(antr + "n");
+        
+        txtAtas3.setText("Senin, 19 Oktober 2018");
+        txtAtas4.setText("Nomor Antrian");
+        txtAtas5.setText("  " + nomor);
+        txtAtas6.setText("Silahkan menunggu " + cvt + " Antrian Lagi ");
+        txtAtas7.setText("Mohon untuk bersabar");
+    }
+    private void prosesAntrian(){
+        if(antrian.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Ambil Nomor antrian terlebih dahulu !");
+        }
+        txtAntrian.setText("");
+        antrian.poll();
+        antrian.forEach((Object element) -> {
+            txtAntrian.append("" + element + "n");
+        });
+        if(antrian.isEmpty()){
+            lbPanggilAntrian.setText("-----");
+        }else{
+            lbPanggilAntrian.setText(""+antrian.peek());
+        }
